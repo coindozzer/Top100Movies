@@ -9,16 +9,16 @@ soup = BeautifulSoup(response, "html.parser")
 print(soup.prettify())
 
 movies = []
-counter = 0
+counter = 101
 top100list = []
 
 movie_div = soup.find(name="div", class_="entity-info-items__list")
 moive_list = movie_div.find_all(name="li")
 
 for item in moive_list:
-    counter += 1
+    counter -= 1
     movies.append(f"{counter}) {item.getText()}")
 
 with open("top100list.txt", "w") as file:
-    for item in movies:
+    for item in movies[::-1]:
         file.write(f"{item}\n")
